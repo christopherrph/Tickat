@@ -1,0 +1,70 @@
+.contact-form{
+    background: white;
+    width: 70%;
+
+}
+
+@font-face {
+    font-family: proxima;
+    src: url(../src/font/proxima.otf);
+  }
+
+.contact-form .form-control{
+    border-radius:1rem;
+}
+.contact-image{
+    text-align: center;
+}
+.contact-image img{
+    border-radius: 6rem;
+    width: 11%;
+    margin-top: -3%;
+    transform: rotate(29deg);
+}
+.contact-form form{
+    padding: 14%;
+    padding-bottom: 5%;
+    padding-top: 12%;
+}
+.contact-form form .row{
+    margin-bottom: -7%;
+}
+.contact-form h3{
+    margin-bottom: 3%;
+    margin-top: -10%;
+    text-align: center;
+    color: black;
+    font-family: proxima;
+}
+.contact-form .btnContact {
+    width: 50%;
+    border: none;
+    border-radius: 1rem;
+    padding: 1.5%;
+    background: #1F5E99;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+}
+.btnContactSubmit
+{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    color: #fff;
+    background-color: #0062cc;
+    border: none;
+    cursor: pointer;
+}
+
+.btnContact:hover
+{
+    transform: scale(1.05);
+    transition: 0.5s;
+}
+
+.sbmt{
+    margin-top: 9%;
+    margin-left: 37%;
+    width: 50%;
+}
