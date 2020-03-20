@@ -119,6 +119,19 @@ class adminnavbar extends Component {
           </a></Link>
       </li>
 
+      {
+        this.props.role == 'Super Admin'
+        ?      
+        <li class="nav-item">
+        <Link to='/reports'><a class="nav-link" href="#">
+          <i class="fa fa-book" aria-hidden="true"></i>
+          Reports
+          </a></Link>
+        </li>
+        :
+        <div></div>
+      }
+
       <li class="nav-item">
         <Link to='/managetransactions'><a class="nav-link" href="#">
           <i class="fa fa-money"></i>

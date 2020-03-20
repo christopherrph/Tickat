@@ -35,6 +35,7 @@ import editevent from './AdminPages/editevent';
 import feedback from './AdminPages/feedback';
 import transactiondetail from './AdminPages/transactiondetail';
 import ticketsales from './AdminPages/ticketsales';
+import reports from './AdminPages/reports';
 
 class App extends Component{
 
@@ -67,6 +68,7 @@ class App extends Component{
         <Route path='/editevent' component={editevent} />
         <Route path='/transactiondetail' component={transactiondetail} />
         <Route path='/ticketsales' component={ticketsales} />
+        <Route path='/reports' component={reports} />
 
         <Route path='/event' component={event} />
         <Route path='/checkout' component={checkout} />
