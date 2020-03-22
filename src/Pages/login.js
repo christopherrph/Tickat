@@ -65,7 +65,7 @@ class login extends Component {
               </div>
               <button class="btn btn-lg btnbiru btn-block text-uppercase" onClick={this.login} type="submit">Sign in</button>
               <hr class="my-4"/>
-              <Link to='/forgotpassword'><button class="btn btn-lg btn-block text-uppercase forgotbutton" type="submit"><i class="fas fa-lock"></i> Forgot Password?</button></Link>
+              <Link to='/forgotpassword' className='removedecoration'><button class="btn btn-lg btn-block text-uppercase forgotbutton" type="submit"><i class="fas fa-lock"></i> Forgot Password?</button></Link>
             </div>
           </div>
         </div>

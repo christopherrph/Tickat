@@ -30,11 +30,13 @@ import userdetail from './AdminPages/userdetail';
 import userhome from './Pages/userhome';
 import event from './Pages/event';
 import checkout from './Pages/checkout';
+import thankyoulogin from './Pages/thankyoulogin';
 import forgotpassword from './Pages/forgotpassword';
 import editevent from './AdminPages/editevent';
 import feedback from './AdminPages/feedback';
 import transactiondetail from './AdminPages/transactiondetail';
 import ticketsales from './AdminPages/ticketsales';
+import monthlyreport from './AdminPages/monthlyreport';
 import reports from './AdminPages/reports';
 
 class App extends Component{
@@ -69,7 +71,9 @@ class App extends Component{
         <Route path='/transactiondetail' component={transactiondetail} />
         <Route path='/ticketsales' component={ticketsales} />
         <Route path='/reports' component={reports} />
+        <Route path='/monthlyreport' component={monthlyreport} />
 
+        <Route path='/thankyoulogin' component={thankyoulogin} />
         <Route path='/event' component={event} />
         <Route path='/checkout' component={checkout} />
         <Route path='/forgotpassword' component={forgotpassword} />

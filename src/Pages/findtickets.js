@@ -110,6 +110,7 @@ class findtickets extends Component {
             return `${hasil}...`
         }
     }
+    
 
     renderevent = () =>{
     var x = this.state.listevent.slice(0+(this.state.pagination*8),8+(this.state.pagination*8))
@@ -119,9 +120,10 @@ class findtickets extends Component {
                     <img class="card-img-top" src={API_URL + val.event_pic} alt="Card image cap"/>
                     <div class="card-body">
                         <h5 class="card-title font-weight-bold" style={{fontSize:18}}>{this.cutsentence(val.event_name)}</h5>
-                        <p class="card-text" style={{fontSize:15, color:'#666666'}}><i class="fas fa-map-marker-alt"></i> {this.cutsentence2(val.event_location)}</p>
+                        <p class="card-text" style={{fontSize:15, color:'#333333'}}><i class="fas fa-map-marker-alt"></i> {this.cutsentence2(val.event_location)}</p>
                     </div>
-                    <p class="card-text font-weight-bold">{moment(val.event_date).format('D MMMM YYYY')}</p>
+                    {/* <p class="card-text font-weight-bold"  style={{color:'#333333'}}><i class="fas fa-money"></i>{startingfrom}</p> */}
+                    <p class="card-text font-weight-bold"  style={{color:'#333333'}}><i class="fas fa-calendar"></i> {moment(val.event_date).format('D MMMM YYYY')}</p>
                     <Link to={`/event/${val.idevent}`}><a href="#" class="btn btnbiru mb-3 hovergede">View Ticket</a></Link>
             </div>
           )

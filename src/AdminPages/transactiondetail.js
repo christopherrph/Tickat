@@ -45,7 +45,7 @@ class partnerdetail extends Component {
     
 
     render() { 
-        const  { from } = this.props.location.state
+        const  { from, month, year } = this.props.location.state
         return ( <div>
         <Navbar/>
         <div class="emp-profile">
@@ -76,7 +76,15 @@ class partnerdetail extends Component {
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <Link to={from}><button class="btnadmin" style={{width:'90px'}}> Back </button></Link>
+                            <Link 
+                                to={{
+                                pathname: `${from}`,
+                                state: {
+                                    month:`${month}`,
+                                    year: `${year}`
+                                }
+                                }}
+                            ><button class="btnadmin" style={{width:'90px'}}> Back</button></Link>
                     </div>
                 </div>
                 <div class="row">

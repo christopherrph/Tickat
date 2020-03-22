@@ -62,7 +62,7 @@ class register extends Component {
                         })
                         .then((res) => {
                         console.log(res.data);
-                        document.getElementById("thankyoumodal").click();
+                        this.setState({redirect: true})
                         })
                         .catch((err) => {
                             alert('Failed')
@@ -81,7 +81,7 @@ class register extends Component {
     render() { 
         const { redirect } = this.state;
         if (redirect == true) {
-          return <Redirect to='/login'/>;
+          return <Redirect to='/thankyoulogin'/>;
         }
 
         return ( 
@@ -194,18 +194,6 @@ class register extends Component {
                     <div class="modal-content">
                     <div class="modal-body">
                         <p>Password did not match</p>
-                    </div>
-                    </div>
-                </div>
-            </div>
-
-            <button  style={{display:'none'}} type="button" class="btn" data-toggle="modal" data-target="#exampleModal" id='thankyoumodal'>
-                </button>
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-body">
-                        <img src='http://clipartmag.com/images/animated-thank-you-45.gif'/>
                     </div>
                     </div>
                 </div>

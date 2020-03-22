@@ -25,6 +25,7 @@ class checkout extends Component {
      }
 
     async componentWillUnmount(){
+        window.removeEventListener('beforeunload', this.keepOnPage);
         if(this.state.redirect != 'kehabisan' && this.state.redirect != 'done' ){
         var ticket = this.state.Ticket
         var length = this.state.Ticket.length;
@@ -38,6 +39,11 @@ class checkout extends Component {
                 }
         }
     }
+
+    keepOnPage(e) {
+        var message = 'Warning!\n\nNavigating away from this page will delete your text if you haven\'t already saved it.';
+        e.returnValue = this.componentWillUnmount
+      }
 
 
     async componentDidMount(){
@@ -54,46 +60,8 @@ class checkout extends Component {
                     console.log(this.state.Ticket);
                     console.log(this.state.eventdetail);
                 })
-                
-                // var ticket = this.state.Ticket
-                // var length = this.state.Ticket.length;
-                // var siap = true
-                // for(var i=0; i<length; i++){
-                //     console.log(ticket[i].amount)
-                //     const amountleft = await Axios.get(API_URL + `/user/getticketamount/${ticket[i].idtiket}`)
-                //     console.log(amountleft.data[0].ticket_stock)
-                //     var amount = ticket[i].amount
-                //     var idtiket = ticket[i].idtiket
-                //     var sisa = amountleft.data[0].ticket_stock - amount
-                //     if(sisa < 0){
-                //         siap = false
-                //     }
-                // }
-                // this.subticket(siap)
         }
     }
-
-    // async subticket(siap){
-    //     if(siap == false){
-    //         alert('You Ran Out Of Ticket')
-    //         this.setState({ redirect: 'kehabisan' })
-    //     }else{
-    //         var ticket = this.state.Ticket
-    //         var length = this.state.Ticket.length;
-    //         for(var i=0; i<length; i++){
-    //             console.log(ticket[i].amount)
-    //             const amountleft = await Axios.get(API_URL + `/user/getticketamount/${ticket[i].idtiket}`)
-    //             console.log(amountleft.data[0].ticket_stock)
-    //             var amount = ticket[i].amount
-    //             var idtiket = ticket[i].idtiket
-    //             var sisa = amountleft.data[0].ticket_stock - amount
-    //             const ticketcut = await Axios.patch(API_URL + `/user/ticketsub`,{
-    //                 sisa,
-    //                 idtiket
-    //             })
-    //         }
-    //     }
-    // }
 
     onBtnAddImageFile = (e) => {
         console.log(e.target.files[0])
@@ -176,7 +144,7 @@ class checkout extends Component {
               this.setState({ redirect: 'done' })
               var email=  this.props.email
               Axios.post(API_URL+'/user/addTransactionTicket', {
-                stateticket, idtransaction, idevent, ticket_status: 'Active', email
+                stateticket, idtransaction, idevent, ticket_status: 'Active', email, event_name: this.state.eventdetail[0].event_name, totalticket, totalprice, transaction_time
               })
           })
           .catch((err) => {
@@ -216,7 +184,7 @@ class checkout extends Component {
             this.setState({ redirect: 'done' })
             var email=  this.props.email
             Axios.post(API_URL+'/user/addTransactionTicket', {
-                stateticket, idtransaction, idevent, ticket_status: 'Active', email
+                stateticket, idtransaction, idevent, ticket_status: 'Active', email, event_name: this.state.eventdetail[0].event_name, totalticket, totalprice, transaction_time
             })
         })
         .catch((err) => {

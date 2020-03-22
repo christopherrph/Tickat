@@ -123,6 +123,15 @@ class adminhome extends Component {
                   <td className='verticalalignmid'>{val.Total_Transaction}</td>
                   <td className='verticalalignmid'><NumberFormat value={val.Total_Money} displayType={'text'} thousandSeparator={true} prefix={'IDR '} /></td>
                   <td className='verticalalignmid'>{val.Total_Ticket}</td>
+                  <td className='verticalalignmid'><Link 
+                    to={{
+                      pathname: `/monthlyreport`,
+                      state: {
+                        month:`${val.Month}`,
+                        year: `${val.Year}`
+                      }
+                    }}
+                ><button class="btn btn-sm btnadmin"> View</button></Link></td>
               </tr>
           )
         })
@@ -130,6 +139,9 @@ class adminhome extends Component {
 
 
     render() { 
+      if(this.props.role !== 'Super Admin'){
+        return <Redirect to='/adminhome'/>;
+      }
         return ( <div>
         <Navbar/>
     <div class="container-fluid paddingatas2">
@@ -285,6 +297,7 @@ class adminhome extends Component {
                   <th>Total Transaction</th>
                   <th>Total Money</th>
                   <th>Total Ticket Sold</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

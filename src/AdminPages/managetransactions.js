@@ -60,7 +60,7 @@ class manageadmin extends Component {
     return x.map((val, index) =>{
       return(
           <tr>
-              <td className='verticalalignmid'>{index+1}</td>
+              <td className='verticalalignmid'>{index+1+(this.state.pagination*10)}</td>
               <td className='verticalalignmid'>{val.event_name}</td>
               <td className='verticalalignmid'>{val.iduser}</td>
               <td className='verticalalignmid'>{val.totalticket}</td>

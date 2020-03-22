@@ -13,10 +13,13 @@ import Confirmation from '../Modal/confirmation';
 class login extends Component {
 
   state={
-    message: ''
+    message: '',
+    isLoading: false
   }
 
   async ResetPassword(){
+    this.setState({message:''})
+    this.setState({isLoading: true})
     var email = this.refs.email.value
     if(email){
     const res = await Axios.get(API_URL + `/public/checkemail/${email}`)
@@ -24,16 +27,20 @@ class login extends Component {
       Axios.patch(API_URL+`/public/forgotpassword/${email}`) // formdata berlaku seperti req.body
               .then((res) => {
                 this.setState({message:'New password has been sent to your email'})
+                this.setState({isLoading: false})
               })
               .catch((err) => {
                 alert('Failed')
+                this.setState({isLoading: false})
                 console.log(err)
               })
     }else{
       this.setState({message:'Email not found'})
+      this.setState({isLoading: false})
     }}
     else{
       this.setState({message:'Please insert email'})
+      this.setState({isLoading: false})
     }
   }
 
@@ -59,7 +66,18 @@ class login extends Component {
               <label>Email:</label>
                 <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" ref='email' autofocus/>
               </div>
-              <center><label style={{color:'black'}}>{this.state.message}</label></center>
+              <center>
+              {
+                this.state.isLoading == true
+                ?
+                <div class="spinner-border mb-2" role="status">
+                <span class="sr-only">Loading...</span>
+                </div>
+                :
+                null
+              }
+                <label style={{color:'black'}}>{this.state.message}</label>
+              </center>
               <button class="btn btn-lg btnbiru btn-block text-uppercase" data-toggle="modal" data-target="#forogtpassconfirm">Reset Password</button>
               <hr class="my-4"/>
             </div>

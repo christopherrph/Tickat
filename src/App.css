@@ -125,6 +125,7 @@
   transition: 0.5s;
 }
 
+
 .divdasar{
   margin: auto;
   width: 100%;
@@ -149,6 +150,10 @@ padding-bottom: 30px;
 .banner{
   width: 100%;
   padding: 0;
+}
+
+.removedecoration{
+  text-decoration: none !important;
 }
 
 .transparentbox{
