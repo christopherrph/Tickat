@@ -37,6 +37,10 @@ class profile extends Component {
                     oldpass
                   })
                 .then((res) => {
+                    this.refs.oldpass.value = ''
+                    this.refs.newpass.value = ''
+                    this.refs.renewpass.value = ''
+                    this.setState({changepasserror: ''})
                     document.getElementById("editpassdismiss").click()
                     document.getElementById("changesuccess").click()
                     })
@@ -70,6 +74,7 @@ class profile extends Component {
               })
             .then((res) => {
                 console.log(res)
+                this.setState({editprofileerror: ''})
                 document.getElementById("editprofiledismiss").click()
                 document.getElementById("changesuccess").click()
                 this.componentDidMount()
@@ -258,7 +263,7 @@ class profile extends Component {
                                         <div class="form-group">
                                             <input type="password" ref='renewpass' class="form-control" placeholder=""/>
                                         </div>
-                                        <label style={{color:'red'}}>{this.state.editprofileerror}</label>
+                                        <label style={{color:'red'}}>{this.state.changepasserror}</label>
                                         </div>
                                         } title='Change Password'>
                                         <button type='button' onClick={this.btnChangePass} className='btn btnbiru'>Confirm</button>

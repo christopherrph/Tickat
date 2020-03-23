@@ -23,6 +23,7 @@ class login extends Component {
     var email = this.refs.email.value
     if(email){
     const res = await Axios.get(API_URL + `/public/checkemail/${email}`)
+    console.log(res.data)
     if(res.data.length != 0){
       Axios.patch(API_URL+`/public/forgotpassword/${email}`) // formdata berlaku seperti req.body
               .then((res) => {

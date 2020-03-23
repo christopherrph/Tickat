@@ -11,7 +11,12 @@ import moment from 'moment'
 class manageuser extends Component {
     state = { 
         listuser:[],
-        pagination: 0
+        pagination: 0,
+        sortName: true,
+        sortEmail: true,
+        sortGender: true,
+        sortPhone: true,
+        sortJoinDate: true
      }
 
     searchuser = () =>{
@@ -91,6 +96,56 @@ class manageuser extends Component {
         })
       }
     }
+
+    sortbyName = () =>{
+      if(this.state.sortName){
+        var x = this.state.listuser.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
+      }else{
+        var x = this.state.listuser.sort((a,b) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortName: !this.state.sortName, listuser: x})
+    }
+
+    sortbyEmail = () =>{
+      if(this.state.sortEmail){
+        var x = this.state.listuser.sort((a,b) => (a.email > b.email) ? 1 : ((b.email > a.email) ? -1 : 0)); 
+      }else{
+        var x = this.state.listuser.sort((a,b) => (a.email < b.email) ? 1 : ((b.email < a.email) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortEmail: !this.state.sortEmail, listuser: x})
+    }
+
+    sortbyGender = () =>{
+      if(this.state.sortGender){
+        var x = this.state.listuser.sort((a,b) => (a.gender > b.gender) ? 1 : ((b.gender > a.gender) ? -1 : 0)); 
+      }else{
+        var x = this.state.listuser.sort((a,b) => (a.gender < b.gender) ? 1 : ((b.gender < a.gender) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortGender: !this.state.sortGender, listuser: x})
+    }
+
+    sortbyPhone = () =>{
+      if(this.state.sortPhone){
+        var x = this.state.listuser.sort((a,b) => (a.phone > b.phone) ? 1 : ((b.phone > a.phone) ? -1 : 0)); 
+      }else{
+        var x = this.state.listuser.sort((a,b) => (a.phone < b.phone) ? 1 : ((b.phone < a.phone) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortPhone: !this.state.sortPhone, listuser: x})
+    }
+    
+    sortbyJoinDate = () =>{
+      if(this.state.sortJoinDate){
+        var x = this.state.listuser.sort((a,b) => (a.joindate > b.joindate) ? 1 : ((b.joindate > a.joindate) ? -1 : 0)); 
+      }else{
+        var x = this.state.listuser.sort((a,b) => (a.joindate < b.joindate) ? 1 : ((b.joindate < a.joindate) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortJoinDate: !this.state.sortJoinDate, listuser: x})
+    }
     
 
 
@@ -104,7 +159,7 @@ class manageuser extends Component {
           <h3 className='pgtitle2'>USER</h3>
             <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <button class="btnadmin"> Button Ya Button</button>
+                {/* <button class="btnadmin"> Button Ya Button</button> */}
               </div>
             </div>
           </div>
@@ -119,11 +174,11 @@ class manageuser extends Component {
                 <tr>
                   <th>No</th>
                   <th>Avatar</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Gender</th>
-                  <th>Phone</th>
-                  <th>Join Date</th>
+                  <th><a onClick={() => this.sortbyName()} className='hovercursor'>Name</a></th>
+                  <th><a onClick={() => this.sortbyEmail()} className='hovercursor'>Email</a></th>
+                  <th><a onClick={() => this.sortbyGender()} className='hovercursor'>Gender</a></th>
+                  <th><a onClick={() => this.sortbyPhone()} className='hovercursor'>Phone</a></th>
+                  <th><a onClick={() => this.sortbyJoinDate()} className='hovercursor'>Join Date</a></th>
                   <th></th>
                 </tr>
               </thead>

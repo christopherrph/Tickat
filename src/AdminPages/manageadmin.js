@@ -85,7 +85,8 @@ class manageadmin extends Component {
           document.getElementById('password').value = ''
           document.getElementById('repassword').value = ''
           alert('Admin Succesfully Added :D')
-          window.location.reload();
+          document.getElementById("addadmincancel").click()
+          this.componentDidMount()
         })
         .catch((err) => {
           alert('Failed')
@@ -119,9 +120,9 @@ class manageadmin extends Component {
       })
         .then((res) =>  {
           console.log(res.data);
-          this.componentDidMount()
           alert('Account Edited')
-          window.location.reload();
+          document.getElementById("editadmincancel").click()
+          this.componentDidMount()
         })
         .catch((err)=>{
           console.log(err)
@@ -215,7 +216,7 @@ class manageadmin extends Component {
                     <input type="text" class="form-control" id="editusername" ref='editusername' defaultValue={this.state.editadmin[0].username} />
                   </div>
                   <div class="form-group">
-                    <label for="message-text" class="col-form-label">Password:</label>
+                    <label for="message-text" class="col-form-label">New Password:</label>
                     <input type="text" class="form-control" id="editpassword" ref='editpassword' />
                   </div>
             </div>

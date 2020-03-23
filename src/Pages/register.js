@@ -137,7 +137,7 @@ class register extends Component {
                                         </div>
                                         <div class="form-group">
                                             <label>Phone Number:</label>
-                                            <input type="number" class="form-control" placeholder="Phone Number" ref='phone'  />
+                                            <input type="number" class="form-control" min='0' placeholder="Phone Number" ref='phone'  />
                                         </div>
                                         <input type="button" data-toggle="modal" data-target="#confirmationModal" name="btnSubmit" class="btnRegister" value="SUBMIT" />
                                     </div>

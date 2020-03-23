@@ -489,10 +489,10 @@ getAVG = (arr,parameter) =>{
                   <table class="table table-striped table-sm">
                     <thead>
                     <tr>
-                      <th><a className='hovercursor'>No</a></th>
-                      <th><a className='hovercursor'>Events Name</a></th>
-                      <th><a className='hovercursor'>Tickets Sold</a></th>
-                      <th><a className='hovercursor'>Total Sales</a></th>
+                      <th><a>No</a></th>
+                      <th><a>Events Name</a></th>
+                      <th><a>Tickets Sold</a></th>
+                      <th><a>Total Sales</a></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -525,10 +525,10 @@ getAVG = (arr,parameter) =>{
                   <table class="table table-striped table-sm">
                     <thead>
                     <tr>
-                      <th><a className='hovercursor'>No</a></th>
-                      <th><a className='hovercursor'>Events Name</a></th>
-                      <th><a className='hovercursor'>Category</a></th>
-                      <th><a className='hovercursor'>Event Date</a></th>
+                      <th><a>No</a></th>
+                      <th><a>Events Name</a></th>
+                      <th><a>Category</a></th>
+                      <th><a>Event Date</a></th>
                     </tr>
                     </thead>
                     <tbody>

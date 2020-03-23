@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Navbar from './adminnavbar';
 import { API_URL } from '../support/API_URL';
 import moment from 'moment'
+import { Redirect } from 'react-router-dom'
 
 class managecategory extends Component {
     state = { 
@@ -76,7 +77,7 @@ class managecategory extends Component {
           console.log(res.data)
           document.getElementById("addcategorycancel").click()
           alert('Category Succesfully Added :D')
-          window.location.reload();
+          this.componentDidMount()
         })
         .catch((err) => {
           alert('Failed')
@@ -105,9 +106,9 @@ class managecategory extends Component {
       })
         .then((res) =>  {
           console.log(res.data);
+          document.getElementById("editcategorycancel").click()
           this.componentDidMount()
           alert('Category Edited')
-          window.location.reload();
         })
         .catch((err)=>{
           console.log(err)
@@ -119,6 +120,9 @@ class managecategory extends Component {
 
 
     render() { 
+      if(this.props.role !== 'Super Admin'){
+        return <Redirect to='/adminhome'/>;
+      }
         return ( <div>
         <Navbar/>
     <div class="container-fluid paddingatas2">
@@ -191,7 +195,7 @@ class managecategory extends Component {
                   </div>
             </div>
             <div class="modal-footer">
-              <button type="button" id='editadmincancel' class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+              <button type="button" id='editcategorycancel' class="btn btn-secondary" data-dismiss="modal">Cancel</button>
               <button type="button" class="btn btnbiru" onClick={() => { if (window.confirm('Are You Sure You Want To Edit?')) this.editcategory(this.state.editcategory[0].idcategory)} }>Submit</button>
             </div>
           </div>
@@ -202,5 +206,12 @@ class managecategory extends Component {
         </div>  );
     }
 }
+
+const mapStateProps = (state) =>{ // Function yang akan terima global state
+  return{
+    username: state.admin.username, //state.user(merujuk ke index.js reducer).username(masuk ke global state di authReducer)
+    role: state.admin.role
+  }
+}
  
-export default managecategory;
+export default connect(mapStateProps,{})(managecategory);

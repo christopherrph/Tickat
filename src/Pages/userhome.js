@@ -10,7 +10,8 @@ import moment from 'moment'
 
 class userhome extends Component {
     state = {
-        listevent:[]
+        listevent:[],
+        listpartner:[]
       }
 
       cutsentence = (kalimat) =>{
@@ -39,8 +40,8 @@ class userhome extends Component {
         }
     }
 
-    componentDidMount(){
-        Axios.get(API_URL + '/admin/getAllEvent')
+    async componentDidMount(){
+        Axios.get(API_URL + '/admin/getAllEventLater')
         .then((res) =>  {
             this.setState({
                 listevent:res.data
@@ -48,6 +49,17 @@ class userhome extends Component {
         })
         .catch((err) =>{
           console.log(err)
+        })
+
+        const partnertop5 = await Axios.get(API_URL + '/user/getPartnerTop5Acara')
+        this.setState({listpartner: partnertop5.data})
+    }
+
+    renderpartner = () =>{
+        return this.state.listpartner.slice(0,5).map((val, index) =>{
+            return(
+                <img className='mr-3 ml-3' style={{height: 150}} src={API_URL + val.partner_pic} alt="Card image cap"/>
+            )
         })
     }
 
@@ -73,9 +85,9 @@ class userhome extends Component {
                 <Header/>
                 <div className='col-12 textsec1'>
                 <center>
-                <img src={require('../img/Background.png')} style={{width:400, marginBottom:20}}/>
+                    <a href='https://kitabisa.com/campaign/indonesialawancorona' target='_blank'><img src={require('../img/Corona.PNG')} className='mb-4' style={{height:300}}/></a>
                     <h1 class='text-uppercase' style={{color:'white'}} >
-                        WELCOME {this.props.name}
+                        HELLO {this.props.name}
                     </h1>
                         <p style={{width:600, color:'white'}}>We're the world’s largest secondary marketplace for tickets to live events. Prices are set by sellers and may be below or above face value.</p>            
                     <Link to='/findtickets'><button class="btn btn-primary btn-primary btnputih anim">FIND TICKETS</button></Link>
@@ -86,12 +98,18 @@ class userhome extends Component {
                     NEAREST EVENTS
                 </h2>
                 <hr className='garisbiru3'></hr>  
-
                 <div className='row discoverevent mb-5'>
                     {this.renderevent()}
                 </div>
-
-
+                <h2 style={{color:'#5D5D5D'}}>
+                    OUR PARTNERS
+                </h2>
+                <hr className='garisbiru3'></hr>  
+                <center>
+                <div className='row discoverevent mb-5 col-8'>
+                   {this.renderpartner()}
+                </div>
+                </center>
             </div>
             <hr></hr>
             <Footer/>

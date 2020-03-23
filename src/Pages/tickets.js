@@ -97,7 +97,7 @@ class tickets extends Component {
             <Header/>
                 <div class="row mb-5">
                             <div class="col-4 mt-5 ml-5 mb-5">
-                                <center><h3>{this.state.eventdetail[0].event_name} Tickets</h3></center>
+                                <center><h3 className='pgtitle'>{this.state.eventdetail[0].event_name} Tickets</h3></center>
                                 <img style={{width: 500}} src={API_URL + this.state.eventdetail[0].event_pic} className='boxshadow mb-3'/>
                                     <div class="">
                                             <div class="ml-3">
@@ -125,9 +125,9 @@ class tickets extends Component {
                                     }
                                     }} style={{marginLeft:-15}}><button className='btn btnbiru'>Back</button></Link>
 
-                                    <Pdf targetRef={ref} filename="tickat.pdf">
+                                    {/* <Pdf targetRef={ref} filename="tickat.pdf">
                                         {({ toPdf }) => <button onClick={toPdf} className='btn btnbiru ml-3'>Print Ticket</button>}
-                                    </Pdf>
+                                    </Pdf> */}
                                     </center>
                                     
                             </div>

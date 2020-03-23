@@ -23,22 +23,22 @@ class event extends Component {
         eventdetail: [{}],
         ticketlist: [{}],
         ticketleft: 0,
-        redirect: false
+        redirect: false,
+        eventbycategory:[]
      }
 
-    componentDidMount(){
+    async componentDidMount(){
         var id = window.location.pathname;
         id = id.replace('/event/', '')  
         console.log(id)
-        Axios.get(API_URL + `/admin/getEventById/${id}`)
-          .then((res) =>  {
-              this.setState({
-                  eventdetail:res.data
-              })
-          })
-          .catch((err) =>{
-            console.log(err)
-        })
+
+        const getEventById = await Axios.get(API_URL + `/admin/getEventById/${id}`)
+        this.setState({eventdetail: getEventById.data})
+
+        const getEventByCategory = await Axios.get(API_URL + `/user/getEventByCategory/${this.state.eventdetail[0].idcategory}`)
+        this.setState({eventbycategory: getEventByCategory.data})
+        console.log(this.state.eventbycategory)
+
         Axios.get(API_URL + `/admin/getTicketByEvent/${id}`)
           .then((res) =>  {
               this.setState({
@@ -50,7 +50,6 @@ class event extends Component {
         })
         Axios.get(API_URL + `/user/countTicketLeft/${id}`)
           .then((res) =>  {
-            console.log(res.data)
               this.setState({
                 ticketleft:res.data[0].TotalStock
               })
@@ -100,6 +99,41 @@ class event extends Component {
                 console.log(this.state.LocalCart)
                 }
             }
+        }
+
+        cutsentence = (kalimat) =>{
+            var sentence = kalimat.split('')
+            var hasil = '';
+            if(sentence.length <= 26){
+                return kalimat
+            }else{
+                for(var i=0; i<21; i++){
+                    hasil += sentence[i] + '';
+                }
+                return `${hasil}...`
+            }
+        }
+
+        renderevent = () =>{
+            var x = this.state.eventbycategory.slice(0,4)
+                return x.map((val, index) =>{
+                  return(
+                    <div class="card" style={{width: '18rem'}}>
+                            <img class="card-img-top" src={API_URL + val.event_pic} alt="Card image cap"/>
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold" style={{fontSize:15}}>{this.cutsentence(val.event_name)}</h5>
+                            </div>
+                            <Link to={`/event/${val.idevent}`} onClick={this.refreshPage}><a href="#" class="btn btnbiru mb-3 hovergede">View Ticket</a></Link>
+                    </div>
+                  )
+              })
+            }
+
+        refreshPage = () =>{
+            setTimeout(function(){ 
+                window.location.reload()
+                window.scrollTo(0, 0)
+                ; }, 500);
         }
 
         renderTotalTicket = () =>{
@@ -252,7 +286,7 @@ class event extends Component {
 
         return (<div className='paddingatas'>
             <Header/>
-    <div class="container mb-5 mt-5 pb-5">
+    <div class="container mb-5 mt-5 pb-2">
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -261,7 +295,7 @@ class event extends Component {
                             <div class="d-flex justify-content-start">
                                 <div class="userData ml-3">
                                     <h6 class="d-block"> <Link to='/findtickets'><a style={{color:'#1F5E99'}}>Tickets</a></Link> > <a>{this.state.eventdetail[0].event_name}</a></h6>
-                                    <h2 class="d-block"><a> {this.state.eventdetail[0].event_name} </a></h2>
+                                    <h2 class="d-block"><a className='pgtitle'> {this.state.eventdetail[0].event_name} </a></h2>
                                 </div>  
                             </div>
                         </div>
@@ -273,14 +307,15 @@ class event extends Component {
                             <div className='col-6' style={{paddingLeft:'15%'}}>
                             <div class="" style={{width:'18rem'}}>
                                 <div class="card-body">
-                                    <h5 class="card-title">{this.state.eventdetail[0].event_name}</h5>
+                                    <h5 class="card-title pgtitle">{this.state.eventdetail[0].event_name}</h5>
                                     <p class="card-text border-bottom pb-2"> <i class="fa fa-calendar mr-4" aria-hidden="true"></i> {moment(this.state.eventdetail[0].event_Date).format('D MMMM YYYY')}</p>
                                     <p class="card-text border-bottom pb-2"><i class="fa fa-map-marker mr-4" aria-hidden="true"></i> {this.state.eventdetail[0].event_location}</p>
                                     <p class="card-text border-bottom pb-2"><i class="fa fa-ticket mr-4" aria-hidden="true"></i> {this.state.ticketleft} Tickets Available </p>
+                                    <p class="card-text pb-2"><i class="fa fa-tag mr-4" aria-hidden="true"></i> {this.state.eventdetail[0].category_name}</p>
                                 </div>
-                                <div class="card-body">
+                                {/* <div class="card-body">
                                     <button className='btn btn-block btnbiru'>Buy Tickets</button>
-                                </div>
+                                </div> */}
                                 </div>
                             </div>
                         </div>
@@ -343,6 +378,11 @@ class event extends Component {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <center><h3 className='pgtitle mt-5'>OTHER SIMILAR EVENTS</h3></center>
+                <div className='row discoverevent'>
+                    {this.renderevent()}
                 </div>
             </div>
         </div>

@@ -29,10 +29,9 @@ class navbar extends Component {
         return ( 
                 <div className='Navbar row '>
                     <img src={require('../img/LogoSS.PNG')} style={{height:60, marginLeft:150}}/>
-                    <div className='menu row'>
+                    <div className='menu row ml-5'>
                     <Link to='/' className='pilihanmenu'>Home</Link>
                     <Link to='/findtickets' className='pilihanmenu'>Find Tickets</Link>
-                        <a href='' className='pilihanmenu'>About Us</a>
                     <Link to='/contactus' className='pilihanmenu'>Contact Us</Link>
                     {
                         this.props.id

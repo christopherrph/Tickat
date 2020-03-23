@@ -13,7 +13,11 @@ class managepartner extends Component {
         listpartner:[],
         addImageFileName : 'Select File',
         addImageFile: undefined,
-        pagination: 0
+        pagination: 0,
+        sortName: true,
+        sortEmail: true,
+        sortAddedBy: true,
+        sortJoinDate: true
      }
 
      searchpartner = () =>{
@@ -107,6 +111,46 @@ class managepartner extends Component {
         })
     }
 
+    sortbyName = () =>{
+      if(this.state.sortName){
+        var x = this.state.listpartner.sort((a,b) => (a.partner_name > b.partner_name) ? 1 : ((b.partner_name > a.partner_name) ? -1 : 0)); 
+      }else{
+        var x = this.state.listpartner.sort((a,b) => (a.partner_name < b.partner_name) ? 1 : ((b.partner_name < a.partner_name) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortName: !this.state.sortName, listpartner: x})
+    }
+
+    sortbyEmail = () =>{
+      if(this.state.sortEmail){
+        var x = this.state.listpartner.sort((a,b) => (a.email > b.email) ? 1 : ((b.email > a.email) ? -1 : 0)); 
+      }else{
+        var x = this.state.listpartner.sort((a,b) => (a.email < b.email) ? 1 : ((b.email < a.email) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortEmail: !this.state.sortEmail, listpartner: x})
+    }
+
+    sortbyAddedBy = () =>{
+      if(this.state.sortAddedBy){
+        var x = this.state.listpartner.sort((a,b) => (a.username > b.username) ? 1 : ((b.username > a.username) ? -1 : 0)); 
+      }else{
+        var x = this.state.listpartner.sort((a,b) => (a.username < b.username) ? 1 : ((b.username < a.username) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortAddedBy: !this.state.sortAddedBy, listpartner: x})
+    }
+
+    sortbyJoinDate = () =>{
+      if(this.state.sortJoinDate){
+        var x = this.state.listpartner.sort((a,b) => (a.join_date > b.join_date) ? 1 : ((b.join_date > a.join_date) ? -1 : 0)); 
+      }else{
+        var x = this.state.listpartner.sort((a,b) => (a.join_date < b.join_date) ? 1 : ((b.join_date < a.join_date) ? -1 : 0)); 
+      }
+      console.log(x)
+      this.setState({ sortJoinDate: !this.state.sortJoinDate, listpartner: x})
+    }
+
     addPartner = () =>{
       let { addImageFile } = this.state;
       let partnername = this.refs.partnername.value;
@@ -194,10 +238,10 @@ class managepartner extends Component {
                 <tr>
                   <th>No</th>
                   <th>Picture</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Addedd By</th>
-                  <th>Join Date</th>
+                  <th><a onClick={() => this.sortbyName()} className='hovercursor'>Name</a></th>
+                  <th><a onClick={() => this.sortbyEmail()} className='hovercursor'>Email</a></th>
+                  <th><a onClick={() => this.sortbyAddedBy()} className='hovercursor'>Added By</a></th>
+                  <th><a onClick={() => this.sortbyJoinDate()} className='hovercursor'>Join Date</a></th>
                   <th></th>
                 </tr>
               </thead>

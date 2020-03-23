@@ -72,7 +72,7 @@ class App extends Component{
         <Route path='/ticketsales' component={ticketsales} />
         <Route path='/reports' component={reports} />
         <Route path='/monthlyreport' component={monthlyreport} />
-
+        
         <Route path='/thankyoulogin' component={thankyoulogin} />
         <Route path='/event' component={event} />
         <Route path='/checkout' component={checkout} />

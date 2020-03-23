@@ -11,7 +11,9 @@ import Header from './navbar';
 
 class login extends Component {
 
-  state={}
+  state={
+    message: ''
+  }
 
   login = () =>{
     var email = this.refs.email.value
@@ -28,11 +30,11 @@ class login extends Component {
         this.setState({ redirect: true })
       })
       .catch((err) => {
-        alert('Wrong Username or Password')
+        this.setState({ message: 'Wrong Email or Password' })
         console.log(err)
       })
     }else{
-      alert('Dont Leave Field Empty')
+      this.setState({ message: "Don't Leave Field Empty" })
     }
 }
 
@@ -63,6 +65,9 @@ class login extends Component {
               <label>Password:</label>
                 <input type="password" id="inputPassword" class="form-control" placeholder="Password" ref='password'/>
               </div>
+
+              <center><label style={{color:'black'}}>{this.state.message}</label></center>
+
               <button class="btn btn-lg btnbiru btn-block text-uppercase" onClick={this.login} type="submit">Sign in</button>
               <hr class="my-4"/>
               <Link to='/forgotpassword' className='removedecoration'><button class="btn btn-lg btn-block text-uppercase forgotbutton" type="submit"><i class="fas fa-lock"></i> Forgot Password?</button></Link>
