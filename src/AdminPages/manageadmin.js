@@ -18,7 +18,11 @@ class manageadmin extends Component {
      }
 
     componentDidMount(){
-      Axios.get(API_URL + '/admin/getAllAdmin')
+      this.fetchdata()
+  }
+
+  fetchdata = () =>{
+    Axios.get(API_URL + '/admin/getAllAdmin')
       .then((res) =>  {
           this.setState({
               listadmin:res.data
@@ -86,7 +90,7 @@ class manageadmin extends Component {
           document.getElementById('repassword').value = ''
           alert('Admin Succesfully Added :D')
           document.getElementById("addadmincancel").click()
-          this.componentDidMount()
+          this.fetchdata()
         })
         .catch((err) => {
           alert('Failed')
@@ -104,7 +108,7 @@ class manageadmin extends Component {
     Axios.patch(API_URL + `/admin/deactivateadmin/${id}`)
         .then((res) =>  {
           console.log(res.data);
-          this.componentDidMount()
+          this.fetchdata()
           alert('Account Deactivated')
         })
   }

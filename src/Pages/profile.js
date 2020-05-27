@@ -11,6 +11,7 @@ import {Helmet} from "react-helmet";
 import Modal from '../Modal/modal';
 import Alert from '../Modal/alert';
 import NumberFormat from 'react-number-format';
+import { Redirect } from 'react-router-dom'
 
 
 class profile extends Component {
@@ -93,31 +94,33 @@ class profile extends Component {
     }
 
     componentDidMount(){
-        const { userid } = this.props.location.state
-          Axios.get(API_URL + `/public/getUsersById/${userid}`)
-          .then((res) =>  {
-              this.setState({
-                userdetail:res.data
-              })
-              console.log(this.state.userdetail)
-              this.setState({
-                avatar: this.state.userdetail[0].avatar
-              })
-          })
-          .catch((err) =>{
-            console.log(err)
-          })
-
-          Axios.get(API_URL + `/user/getTransactionByUser/${userid}`)
-          .then((res) =>  {
-              this.setState({
-                transactionlist:res.data
-              })
-              console.log(this.state.transactionlist)
-          })
-          .catch((err) =>{
-            console.log(err)
-          })
+        if(this.props.location.state){
+            const { userid } = this.props.location.state
+            Axios.get(API_URL + `/public/getUsersById/${userid}`)
+            .then((res) =>  {
+                this.setState({
+                  userdetail:res.data
+                })
+                console.log(this.state.userdetail)
+                this.setState({
+                  avatar: this.state.userdetail[0].avatar
+                })
+            })
+            .catch((err) =>{
+              console.log(err)
+            })
+  
+            Axios.get(API_URL + `/user/getTransactionByUser/${userid}`)
+            .then((res) =>  {
+                this.setState({
+                  transactionlist:res.data
+                })
+                console.log(this.state.transactionlist)
+            })
+            .catch((err) =>{
+              console.log(err)
+            })
+        }
         }
 
     changeavatar = (val) =>{
@@ -163,6 +166,9 @@ class profile extends Component {
 
 
     render() { 
+        if(!this.props.id){
+            return <Redirect to='/login'/>;
+          }
         return (<div className='paddingatas'>
             <Header/>
 <div class="container mb-5 mt-5 pb-5">

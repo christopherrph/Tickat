@@ -76,7 +76,8 @@ class findtickets extends Component {
         Axios.get(API_URL + `/user/getEventbyCategory/${id}`)
         .then((res) =>  {
             this.setState({
-                listevent:res.data
+                listevent:res.data,
+                pagination: 0
             })
             console.log(this.state.listevent)
         })
@@ -110,7 +111,6 @@ class findtickets extends Component {
             return `${hasil}...`
         }
     }
-    
 
     renderevent = () =>{
     var x = this.state.listevent.slice(0+(this.state.pagination*8),8+(this.state.pagination*8))
@@ -124,6 +124,13 @@ class findtickets extends Component {
                     </div>
                     {/* <p class="card-text font-weight-bold"  style={{color:'#333333'}}><i class="fas fa-money"></i>{startingfrom}</p> */}
                     <p class="card-text font-weight-bold"  style={{color:'#333333'}}><i class="fas fa-calendar"></i> {moment(val.event_date).format('D MMMM YYYY')}</p>
+                    {/* <p class="card-text font-weight-bold"  style={{color:'#333333'}}>Last Transaction: {
+                        val.LastTransaction
+                        ?
+                        moment(val.LastTransaction).format('D MMMM YYYY')
+                        :
+                        "Not Found"
+                    }</p> */}
                     <Link to={`/event/${val.idevent}`}><a href="#" class="btn btnbiru mb-3 hovergede">View Ticket</a></Link>
             </div>
           )
@@ -132,7 +139,7 @@ class findtickets extends Component {
 
     searchEvent = () =>{
         let search = this.refs.searchevent.value;
-        Axios.get(API_URL + `/admin/getAllEventLike/${search}`)
+        Axios.get(API_URL + `/admin/getAllEventLikeUser/${search}`)
         .then((res) =>  {
             this.setState({
                 listevent:res.data
@@ -165,7 +172,7 @@ class findtickets extends Component {
                         <input class="form-control"  ref='searchevent' type='text' placeholder='Search Events Name....' id='searchbox'/>
                         </div>
                         <div className='col-3'>
-                        <button class="btnbiru" id='searchbutton' onClick={this.searchEvent}>SEARCH</button>
+                        <button class="btnbiru" id='searchbutton' onClick={this.searchEvent}>SEARCHS</button>
                         </div>
                         </div>
                     </div>

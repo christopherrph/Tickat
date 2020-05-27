@@ -17,6 +17,7 @@ class ticketsales extends Component {
         eventid: '',
         paymentmethodsales: [],
         tickettypesales: [],
+        userage: [],
         totalticketsold: 0,
         pagination: 0,
         totalpayment: 0
@@ -72,6 +73,10 @@ class ticketsales extends Component {
       .catch((err) =>{
         console.log(err)
       })
+
+      const getuserage = await Axios.get(API_URL + `/admin/getEventUserAge/${id}`)
+      this.setState({userage: getuserage.data})
+      console.log(this.state.userage)
   }
 
   renderPagination = () =>{
@@ -139,6 +144,15 @@ class ticketsales extends Component {
   })
   }
 
+  renderuserage = () =>{
+    return this.state.userage.map((val, index) =>{
+      var persentase = Math.round(val.Total * 100 / this.sumOfArrayWithParameter(this.state.userage, 'Total'))
+      return(
+      <dd className={ `percentage percentage-${persentase}` }><span class="text">{val.Age}: {val.Total} - {persentase}%</span></dd>
+      )
+  })
+  }
+
   sumOfArrayWithParameter = (array, parameter) => {
     let sum = null;
     if (array && array.length > 0 && typeof parameter === 'string') {
@@ -181,6 +195,15 @@ class ticketsales extends Component {
               </dl>
             </div>
           </div>
+          <div className='col-10' style={{marginLeft: '10%'}}>
+                <dl>
+                  <dt>
+                    User Age Group
+                  </dt>
+                  {this.renderuserage()}
+              </dl>
+          </div>
+
 
           <div class="row mb-5">
             <div class="col-xl-3 col-lg-6">

@@ -99,9 +99,9 @@ class manageuser extends Component {
 
     sortbyName = () =>{
       if(this.state.sortName){
-        var x = this.state.listuser.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)); 
+        var x = this.state.listuser.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));  //ASC
       }else{
-        var x = this.state.listuser.sort((a,b) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0)); 
+        var x = this.state.listuser.sort((a,b) => (a.name < b.name) ? 1 : ((b.name < a.name) ? -1 : 0));  //DESC
       }
       console.log(x)
       this.setState({ sortName: !this.state.sortName, listuser: x})

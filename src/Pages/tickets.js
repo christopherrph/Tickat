@@ -9,6 +9,7 @@ import Header from './navbar';
 import moment from 'moment';
 import NumberFormat from 'react-number-format';
 import Pdf from "react-to-pdf";
+import { Redirect } from 'react-router-dom'
 const ref = React.createRef();
 
 class tickets extends Component {
@@ -21,35 +22,39 @@ class tickets extends Component {
     }
 
     async componentDidMount(){
-        const  { idtransaction } = this.props.location.state
-        const  { idevent } = this.props.location.state
-        const res = await this.setState({
-            idtransaction: idtransaction,
-            idevent: idevent
-        }, () => {
-            console.log(this.state.idtransaction);
-            console.log(this.state.idevent);
-        })
-                    Axios.get(API_URL + `/admin/getEventById/${this.state.idevent}`)
-                    .then((res) =>  {
-                        this.setState({
-                            eventdetail:res.data
+        if(this.props.location.state){
+            const  { idtransaction } = this.props.location.state
+            const  { idevent } = this.props.location.state
+            const res = await this.setState({
+                idtransaction: idtransaction,
+                idevent: idevent
+            }, () => {
+                console.log(this.state.idtransaction);
+                console.log(this.state.idevent);
+            })
+                        Axios.get(API_URL + `/admin/getEventById/${this.state.idevent}`)
+                        .then((res) =>  {
+                            this.setState({
+                                eventdetail:res.data
+                            })
                         })
-                    })
-                    .catch((err) =>{
-                      console.log(err)
-                    })
-
-                    Axios.get(API_URL + `/user/getTickets/${this.state.idtransaction}`)
-                    .then((res) =>  {
-                        this.setState({
-                            ticketList:res.data
+                        .catch((err) =>{
+                          console.log(err)
                         })
-                        console.log(this.state.ticketList);
-                    })
-                    .catch((err) =>{
-                      console.log(err)
-                    })
+    
+                        Axios.get(API_URL + `/user/getTickets/${this.state.idtransaction}`)
+                        .then((res) =>  {
+                            this.setState({
+                                ticketList:res.data
+                            })
+                            console.log(this.state.ticketList);
+                        })
+                        .catch((err) =>{
+                          console.log(err)
+                        })
+        }else{
+            this.setState({ redirecterror: true })
+        }
     }
 
     renderTicket = () =>{
@@ -93,6 +98,10 @@ class tickets extends Component {
     }
 
     render() { 
+        const { redirecterror } = this.state;			//REDIRECT
+     if (redirecterror) {
+       return <Redirect to='/404'/>;
+     }
         return (<div className='paddingatas'>
             <Header/>
                 <div class="row mb-5">
@@ -125,9 +134,10 @@ class tickets extends Component {
                                     }
                                     }} style={{marginLeft:-15}}><button className='btn btnbiru'>Back</button></Link>
 
-                                    {/* <Pdf targetRef={ref} filename="tickat.pdf">
+                                    <Pdf targetRef={ref} filename="tickat.pdf">
                                         {({ toPdf }) => <button onClick={toPdf} className='btn btnbiru ml-3'>Print Ticket</button>}
-                                    </Pdf> */}
+                                    </Pdf>
+                                    
                                     </center>
                                     
                             </div>

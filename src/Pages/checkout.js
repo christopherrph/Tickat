@@ -24,7 +24,7 @@ class checkout extends Component {
         ticketready: true
      }
 
-    async componentWillUnmount(){
+    async componentWillUnmount(){   // EVENT SCHEDULER
         window.removeEventListener('beforeunload', this.keepOnPage);
         if(this.state.redirect != 'kehabisan' && this.state.redirect != 'done' ){
         var ticket = this.state.Ticket
