@@ -126,7 +126,7 @@ class manageadmin extends Component {
           console.log(res.data);
           alert('Account Edited')
           document.getElementById("editadmincancel").click()
-          this.componentDidMount()
+          this.fetchdata()
         })
         .catch((err)=>{
           console.log(err)

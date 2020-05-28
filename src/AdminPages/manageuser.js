@@ -22,7 +22,7 @@ class manageuser extends Component {
     searchuser = () =>{
       var searchuser = this.refs.searchuser.value;
       if(searchuser == ''){
-        this.componentDidMount()
+        this.fetchdata()
       }else{
         Axios.get(API_URL + `/admin/getAllUserLike/${searchuser}`)
         .then((res) =>  {
@@ -38,7 +38,11 @@ class manageuser extends Component {
     }
 
     componentDidMount(){
-        Axios.get(API_URL + '/admin/getAllUser')
+      this.fetchdata()
+    }
+
+    fetchdata = () =>{
+      Axios.get(API_URL + '/admin/getAllUser')
         .then((res) =>  {
             this.setState({
                 listuser:res.data
